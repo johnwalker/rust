@@ -92,6 +92,8 @@ fn find_library_crate_aux(
     // want: crate_name.dir_part() + prefix + crate_name.file_part + "-"
     let prefix = format!("{}{}-", prefix, crate_name);
     let mut matches = ~[];
+    debug!("find_library_crate_aux: prefix = {}, suffix = {}",
+            prefix, suffix);
     filesearch::search(filesearch, |path| -> FileMatch {
       // FIXME (#9639): This needs to handle non-utf8 paths
       let path_str = path.filename_str();
@@ -192,6 +194,8 @@ pub fn metadata_matches(extern_metas: &[@ast::MetaItem],
 // local_metas: metas we're looking for
     debug!("matching {} metadata requirements against {} items",
            local_metas.len(), extern_metas.len());
+    debug!("extern_metas = {:?} local_metas = {:?}",
+            extern_metas, local_metas);
 
     do local_metas.iter().all |needed| {
         attr::contains(extern_metas, *needed)

@@ -78,6 +78,9 @@ impl PkgId {
             }
         };
 
+        debug!("pkg_id::new: {} {} {:?}",
+                path.display(), short_name, version);
+
         PkgId {
             path: path.clone(),
             short_name: short_name.to_owned(),

@@ -51,6 +51,22 @@ pub fn pkg_parent_workspaces(cx: &Context, pkgid: &PkgId) -> ~[Path] {
     }
 }
 
+/*
+/// Given a package ID, return a vector of all of the directories (maybe not
+/// workspaces) in the RUST_PATH that contain it
+pub fn pkg_parent_directories(cx: &Context, pkgid: &PkgId) -> ~[Path] {
+    let rs: ~[Path] = rust_path().move_iter()
+        .filter(|ws| workspace_contains_package_id_(pkgid, ws, |s| {s.clone()}).is_some())
+        .collect();
+    if cx.use_rust_path_hack {
+        rs + option_to_vec(find_dir_using_rust_path_hack(pkgid))
+    }
+    else {
+        rs
+    }
+}
+*/
+
 pub fn is_workspace(p: &Path) -> bool {
     p.join("src").is_dir()
 }

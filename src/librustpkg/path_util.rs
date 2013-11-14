@@ -78,7 +78,9 @@ pub fn workspace_contains_package_id_(pkgid: &PkgId, workspace: &Path,
                 let pf = p.filename_str();
                 do pf.iter().any |&g| {
                     match split_version_general(g, '-') {
-                        None => false,
+                        None => {
+                            g == pkgid.short_name // I guess?
+                        }
                         Some((ref might_match, ref vers)) => {
                             *might_match == pkgid.short_name
                                 && (pkgid.version == *vers || pkgid.version == NoVersion)
